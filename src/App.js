@@ -119,7 +119,7 @@ const App = () => {
         <div className='card-container'>
           <Grid container spacing={3}> 
           {essentialItems.map(({id,title,img,description,price}) => (
-            <Grid item xs={3} key={id}>
+            <Grid item lg={3} key={id} flexGrow={1}>
                 <div className='feature-card card'>
                   <div className='card-img-wrapper'>
                       <img src={'img/' + img}/>
