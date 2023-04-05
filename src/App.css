@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+   {/* <div class="splide__arrows">
+		<button class="splide__arrow splide__arrow--prev">
+			<NavigateBeforeIcon />
+		</button>
+		<button class="splide__arrow splide__arrow--next">
+    <NavigateNextIcon />
+		</button>
+  </div> */}

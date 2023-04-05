@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&display=swap');
+body{
+  font-family: 'Open Sans', sans-serif;
+}
+.feature-card{
+  img{
+    max-height: 370px;
+    object-fit: cover;
+    object-position: top center;
+    width: 100%;
+  }
+  .card-img-wrapper{
+    position: relative;
+    overflow: hidden;
+    max-height: 370px;
+    margin-bottom: 10px;
+    &:hover{  
+      .add-to-cart-btn{
+        top: calc(100% - 37px);
+      }
+    }
+  }
+  p{
+    margin: 0;
+    margin-bottom: 10px;
+  }
+  .add-to-cart-btn{
+    border-radius: 0;
+    transition: all 0.3s;
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    top: calc(100% + 10px);
+    height: 37px;
+  }
+}
+section{
+  padding: 40px 0;
+}
+.offset-images{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  .image1{
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    grid-area: 3 / 1 / 13 / 8;
+    object-position: top center;
+  }
+  .image2{
+    object-fit: cover;
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    grid-area: 1/ -1 / 12 / 6;
+    object-position: top center;
+    position: relative;
+    z-index: -1;
+  }
+}
+.backgroundImageStyles{
+  height: 500px;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.splide__slide img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+}
+
+.banner-box{
+  position: absolute;
+  background: white;
+  top: 50%;
+  width: 25%;
+  right: 70px;
+  padding: 15px;
+  transform: translateY(-50%);
+  .bannerinner-box{
+    padding: 15px;
+    border: 2px solid black;
+    text-align: center;
+    .collection-text{
+      margin-bottom: 15px;
+      display: block;
+    }
+    p{
+      font-size: 12px;
+    }
+  }
+}
+.splide{
+  .splide__pagination {
+    bottom: 2rem;
+    left: initial;
+    .splide__pagination__page.is-active{
+      opacity: 1;
+    }
+  }
+  .splide__arrow{
+    background-color: transparent;
+    opacity: 1;
+    height: 2.5rem;
+    width: 2.5rem;
+    svg {
+      fill: white;
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
+}
