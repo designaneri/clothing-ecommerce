@@ -9,6 +9,7 @@ import {
   MenuItem,
   Box,
   styled,
+  Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
@@ -108,7 +109,11 @@ const Header = () =>{
             open: drawerOpen,
             onClose: handleDrawerClose,
           }}
+          className='menu-drawer'
         >
+          <Typography variant='h6'>
+            Menu
+          </Typography>
           <div>{getDrawerChoices()}</div>
         </Drawer>
         <img src='img/logo-small.png' className='logo-small'/>

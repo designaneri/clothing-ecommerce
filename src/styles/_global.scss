@@ -149,3 +149,16 @@ section{
     }
   }
 }
+.menu-drawer{
+  .MuiPaper-root{
+    &.MuiPaper-elevation{
+      min-width: 230px;
+      .MuiTypography-root.MuiTypography-h6{
+        padding: 15px 20px;
+      }
+      .MuiButtonBase-root{
+        padding: 15px 20px;
+      }
+    }
+  }
+}
