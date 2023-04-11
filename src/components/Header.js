@@ -34,13 +34,13 @@ const Header = () =>{
     },
     {
       id: 2,
-      label: "Home 2",
-      link: "/Home2"
+      label: "Shop",
+      link: "/Shop"
     },
     {
       id: 3,
-      label: "Home 3",
-      link: "/Home3"
+      label: "About Us",
+      link: "/AboutUs"
     }
   ]
   const [state, setState] = useState({
@@ -129,6 +129,7 @@ const Header = () =>{
               <a href={`tel:00-123-5678`}><LocalPhoneOutlinedIcon sx={{verticalAlign:'middle'}}/> 00-123-5678</a>
             </div>
             <div>
+                {/* <Typography variant='h1'>Statement Piece</Typography> */}
                 <img src='img/logo.png' className='logo-outer'/>
             </div>
             <div>
@@ -154,7 +155,7 @@ const Header = () =>{
   const getDrawerChoices = () => {
     return headersData.map(({ label, href }) => {
       return (
-        <Link
+        <Link disableRipple
           {...{
             component: RouterLink,
             to: href,
@@ -163,7 +164,7 @@ const Header = () =>{
             key: label,
           }}
         >
-          <MenuItem>{label}</MenuItem>
+          <MenuItem disableRipple>{label}</MenuItem>
         </Link>
       );
     });

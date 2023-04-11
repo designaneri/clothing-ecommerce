@@ -117,7 +117,7 @@ section{
   }
 }
 .logo-outer{
-  max-width: 100px;
+  max-width: 270px;
   transition: all 0.3s;
 }
 .logo-small{
@@ -126,17 +126,18 @@ section{
 .main-container{
   padding-top: 74px;
   @media (min-width: $md) {
-    padding-top: 154px;
+    padding-top: 145px;
   }
 }
 .header-outer{
   .header-top{
-    border-bottom: 1px solid #b4b4b4;
+    border-bottom: 1px solid #eee;
     &.scrolled{
       border-bottom: 0;
       .logo-outer {
-          max-width: 70px;
+          max-width: 210px;
       }
+    
     }
     a{
       color: black;
@@ -144,8 +145,40 @@ section{
     }
   }
   .header-bottom{
+    .MuiLink-root{
+      .MuiMenuItem-root{
+        padding: 3px 0 3px 0;
+        font-size: 16px;
+        margin: 0 20px;
+        position: relative;
+        &:after{
+          position: absolute;
+          content: "";
+          left: 0;
+          width: 0;
+          height: 1px;
+          bottom: 0;
+          transition: all 0.3s;
+          background: black;
+        }
+        &:hover {
+           background-color: transparent;
+           &:after{
+            width: 100%;
+          }
+        }
+      }
+    }
     &.scrolled{
       display: none;
+    }
+  }
+  &:hover{
+    .header-top{
+      border-bottom: 1px solid #eee;
+    }
+    .header-bottom{
+      display: flex;
     }
   }
 }

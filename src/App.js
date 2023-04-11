@@ -44,6 +44,12 @@ const theme = createTheme({
     body1: {
       fontSize: 12,
     },
+    h1: {
+      fontFamily: ['Libre Baskerville', 'serif'].join(','),
+      letterSpacing: '-1.2px',
+      fontSize: 24,
+      fontWeight: 600
+    },
     h4: {
       fontFamily: ['Libre Baskerville', 'serif'].join(','),
       letterSpacing: '-1.2px',
