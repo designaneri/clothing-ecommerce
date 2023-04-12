@@ -3,7 +3,6 @@ import './Header.styles.scss';
 import { Link as RouterLink, } from 'react-router-dom';
 import {
   AppBar, 
-  Toolbar,
   IconButton,
   Drawer,
   Link,

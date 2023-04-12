@@ -79,10 +79,13 @@ section{
   position: absolute;
   background: white;
   top: 50%;
-  width: 25%;
+  width: 50%;
   right: 70px;
   padding: 15px;
   transform: translateY(-50%);
+  @media (min-width: $md) {
+    width: 25%;
+  }
   .bannerinner-box{
     padding: 15px;
     border: 2px solid black;

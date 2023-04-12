@@ -10,12 +10,12 @@ import {
   Typography,
   Container,
 } from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider, responsiveFontSizes } from '@mui/material/styles';
 import { Splide, SplideSlide, SplideTrack } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import React, { useState, useEffect } from 'react';
 
-const theme = createTheme({
+let theme = createTheme({
   status: {
     danger: '#e53e3e',
   },
@@ -32,15 +32,21 @@ const theme = createTheme({
   typography: {
     fontFamily: ['Open Sans', 'sans-serif'].join(','),
     subtitle1: {
-      fontSize: 11,
+      fontSize: 10,
       fontWeight: 500,
       fontFamily: ['Libre Baskerville', 'serif'].join(','),
+      '@media (min-width:600px)': {
+        fontSize: 11,
+      },
     },
     subtitle2: {
-      fontSize: 20,
+      fontSize: 16,
       textTransform: 'uppercase',
       fontWeight: 600,
       fontFamily: ['Libre Baskerville', 'serif'].join(','),
+      '@media (min-width:600px)': {
+        fontSize: 20,
+      },  
     },
     body1: {
       fontSize: 12,
@@ -48,8 +54,11 @@ const theme = createTheme({
     h1: {
       fontFamily: ['Libre Baskerville', 'serif'].join(','),
       letterSpacing: '-1.2px',
-      fontSize: 24,
-      fontWeight: 600
+      fontSize: 20,
+      fontWeight: 600,
+      '@media (min-width:600px)': {
+        fontSize: 24,
+      },  
     },
     h4: {
       fontFamily: ['Libre Baskerville', 'serif'].join(','),
@@ -60,6 +69,8 @@ const theme = createTheme({
     },
   },
 });
+
+theme = responsiveFontSizes(theme);
 
 const App = () => {
   const essentialItems = [
