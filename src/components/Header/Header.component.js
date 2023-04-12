@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './Header.styles.scss';
 import { Link as RouterLink, } from 'react-router-dom';
 import {
   AppBar, 
@@ -14,6 +15,7 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+
 const HeaderWrap = styled(Box)(({ theme }) => ({
   background: 'white',
   position:'static',
