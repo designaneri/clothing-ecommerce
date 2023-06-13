@@ -32,6 +32,11 @@ const CustomMenuItem = styled(MenuItem)(({theme}) =>({
   fontSize: 14
 }))
 
+const DrawerMenuItems = styled(RouterLink)(({theme})=>({
+  color: 'black',
+  textDecoration: 'none'
+}))
+
 const Header = () =>{
   const headersData=[
     {
@@ -119,30 +124,94 @@ const Header = () =>{
       
     return (
       <HeaderWrap className={`header ${scrolled ? "scrolled" : ""}`}>
-        <HeaderInner justifyContent={'start'}>
-        <IconButton
-          {...{
-            edge: 'start',
-            color: 'inherit',
-            'aria-label': 'menu',
-            'aria-haspopup': 'true',
-            onClick: toggleDrawer('left', true),
-          }}
-        >
-          <MenuIcon />
-        </IconButton>
-        <Drawer
-           anchor={'left'}
-           open={state['left']}
-           onClose={toggleDrawer('left', false)}
-          className='menu-drawer'
-        >
-          <Typography variant='h6'>
-            Menu
-          </Typography>
-          <div>{getDrawerChoices('left')}</div>
-        </Drawer>
-        <img src='img/logo-small.png' className='logo-small'/>
+        <HeaderInner justifyContent={'space-between'}>
+       <Box sx={{display:'flex'}}>
+            <IconButton
+              {...{
+                edge: 'start',
+                color: 'inherit',
+                'aria-label': 'menu',
+                'aria-haspopup': 'true',
+                onClick: toggleDrawer('left', true),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Drawer
+              anchor={'left'}
+              open={state['left']}
+              onClose={toggleDrawer('left', false)}
+              className='menu-drawer'
+            >
+              <Typography variant='h6'>
+                Menu
+              </Typography>
+              <div>{getDrawerChoices('left')}</div>
+            </Drawer>
+            <img src='img/logo-small.png' className='logo-small'/>
+        </Box>
+        <Box sx={{display:'flex', alignItems: 'center'}}>
+            <RouterLink to={`tel:001235678`}><LocalPhoneOutlinedIcon sx={{fill: 'black', verticalAlign:'middle'}}/></RouterLink>
+            <Box className='text-right'>
+              <Button
+                color='black'
+                variant="text"
+                onClick={handleClick}
+                size="small"
+                sx={{ ml: 2, minWidth: 'auto' }}
+                aria-controls={open ? 'account-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+              >
+                <AccountCircleOutlinedIcon/>
+              </Button>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 1px 3px rgba(0,0,0,0.15))',
+                    mt: 1.5,
+                    minWidth: '120px',
+                    '&:before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translateY(-50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+              >
+                {/* <CustomMenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <Settings fontSize="small" />
+                  </ListItemIcon>
+                  Settings
+                </CustomMenuItem> */}
+                <CustomMenuItem onClick={handleLogout}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </CustomMenuItem>
+             </Menu>
+               
+                 
+            </Box>
+        </Box>
       </HeaderInner>
       </HeaderWrap>
     );
@@ -237,9 +306,9 @@ const Header = () =>{
   const getDrawerChoices = () => {
     return headersData.map(({ label, link }) => {
       return (
-        <Link onClick={toggleDrawer('left', false)} to={link} color={'inherit'} key={label} sx={{textDecoration: 'none'}}>
+        <DrawerMenuItems onClick={toggleDrawer('left', false)} to={link} key={label} color='black' sx={{color: 'black', textDecoration: 'none'}}>
           <MenuItem disableRipple>{label}</MenuItem>
-        </Link>
+        </DrawerMenuItems>
       );
     });
   };

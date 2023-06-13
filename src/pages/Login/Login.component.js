@@ -8,26 +8,35 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('aneri@gmail.com');
   const [password, setPassword] = useState('Aneri@123');
-  const [errors, setErrors] = useState({ email: '', password: '' });
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
+  const [errors, setErrors] = useState(false);
+  const [errorMessage, setErrorMessage] = useState({ email: '', password: '' });
   const expectedEmail = 'aneri@gmail.com';
   const expectedPassword = 'Aneri@123';
   const validate = () => {
     let isValid = true;
-
+    let temp = { ...errorMessage };
     // Email validation
     if (email !== expectedEmail) {
+      setErrors(true);
       isValid = false;
-      setErrors('Please enter aneri@gmail.com');
+      temp.email = 'Please enter aneri@gmail.com';
+      // setErrors('Please enter aneri@gmail.com');
     }
 
     // Password validation
     if (password !== expectedPassword) {
+      setErrors(true);
       isValid = false;
-      setErrors('Please enter Aneri@123 as password');
+      temp.password = 'Please enter Aneri@123 as password';
+      // isValid = false;
+      // setErrors('Please enter Aneri@123 as password');
     } 
-
+    if (!isValid) {
+      setErrorMessage({
+        ...temp,
+      });
+      return;
+    }
     return isValid;
   };
   const handleLogin = (e) => {
@@ -52,8 +61,8 @@ const Login = () => {
         </Box>
 
         <form onSubmit={handleLogin}>
-          <Typography component='h5' variant='h5' sx={{ mb: 2 }}>
-            Login Page
+          <Typography component='h4' variant='h4' sx={{ mb: 2 }}>
+            Login to your account
           </Typography>
           <CustomizedInputs
             margin='normal'
@@ -64,8 +73,8 @@ const Login = () => {
             inputProps={{ maxLength: 90 }}
             value={email}
             handleChange={(e) => setEmail(e.target.value)}
-            errorValue={errors.email}
-            errorMessage={errors.email}
+            errorValue={errors}
+            errorMessage={errorMessage.email}
           />
           <CustomizedInputs
             margin='normal'
@@ -76,8 +85,8 @@ const Login = () => {
             inputProps={{ maxLength: 90 }}
             value={password}
             handleChange={(e) => setPassword(e.target.value)}
-            errorValue={errors.password}
-            errorMessage={errors.password}
+            errorValue={errors}
+            errorMessage={errorMessage.password}
           />
           <Button
             color='black'

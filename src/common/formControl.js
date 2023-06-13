@@ -1,7 +1,7 @@
 import InputBase from '@mui/material/InputBase';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
-import FormHelperText from '@mui/material/FormHelperText';
+import Typography from '@mui/material/Typography';
 
 const CustomizedInputs = (props) => {
   const {
@@ -26,7 +26,6 @@ const CustomizedInputs = (props) => {
       variant="standard"
       fullWidth
       sx={{ mb: 2 }}
-      error={errorMessage}
     >
       <InputLabel shrink htmlFor="bootstrap-input">
         {displayLabel}
@@ -48,7 +47,7 @@ const CustomizedInputs = (props) => {
         readOnly={readOnly}
         disabled={disabled}
       />
-      {errorValue ? <FormHelperText>{errorMessage}</FormHelperText> : ''}
+      {errorValue ? <Typography variant="caption" color="error">{errorMessage}</Typography> : ''}
     </FormControl>
   );
 };

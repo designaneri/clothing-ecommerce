@@ -56,9 +56,39 @@ let theme = createTheme({
         fontSize: 24,
       },  
     },
-    h4: {
+    h2: {
       fontFamily: ['Libre Baskerville', 'serif'].join(','),
       letterSpacing: '-1.2px',
+      fontSize: 18,
+      fontWeight: 600,
+      '@media (min-width:600px)': {
+        fontSize: 22,
+      },  
+    },
+    h3: {
+      fontFamily: ['Libre Baskerville', 'serif'].join(','),
+      letterSpacing: '-1.2px',
+      fontSize: 16,
+      fontWeight: 600,
+      '@media (min-width:600px)': {
+        fontSize: 18,
+      },  
+    },
+    h4: {
+      fontFamily: ['Libre Baskerville', 'serif'].join(','),
+      fontSize: 14,
+      fontWeight: 600,
+      '@media (min-width:600px)': {
+        fontSize: 16,
+      },  
+    },
+    h5: {
+      fontFamily: ['Libre Baskerville', 'serif'].join(','),
+      fontSize: 12,
+      fontWeight: 600,
+      '@media (min-width:600px)': {
+        fontSize: 14,
+      },  
     },
     h6: {
       fontFamily: ['Libre Baskerville', 'serif'].join(','),
