@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Header.styles.scss';
-import { Link as RouterLink, } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import {
   AppBar, 
   IconButton,
@@ -9,11 +9,13 @@ import {
   MenuItem,
   Box,
   styled,
-  Typography,
+  Typography, Avatar, Menu, Divider, ListItemIcon,Button
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LocalPhoneOutlinedIcon from '@mui/icons-material/LocalPhoneOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import Settings from '@mui/icons-material/SettingsOutlined';
+import Logout from '@mui/icons-material/LogoutOutlined';
 
 const HeaderWrap = styled(Box)(({ theme }) => ({
   background: 'white',
@@ -26,12 +28,16 @@ const HeaderInner = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems:'center'
 }));
+const CustomMenuItem = styled(MenuItem)(({theme}) =>({
+  fontSize: 14
+}))
+
 const Header = () =>{
   const headersData=[
     {
       id: 1,
       label: "Home",
-      href: "/Home"
+      link: "/"
     },
     {
       id: 2,
@@ -48,9 +54,28 @@ const Header = () =>{
     mobileView: false,
     drawerOpen: false
   });
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    navigate('/login');
+  };
   const { mobileView, drawerOpen } = state;
   const [scrolled, setScrolled] = useState(false);
   var lastScrollTop = 0;
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
+  };
 
   useEffect(() => {
     const setResponsiveness = () => {
@@ -85,11 +110,13 @@ const Header = () =>{
       window.removeEventListener("scroll", () => handleScroll());
     };
   }, []);
+  
   const displayMobile = () => {
-    const handleDrawerOpen = () =>
-    setState((prevState) => ({ ...prevState, drawerOpen: true }));
-    const handleDrawerClose = () =>
-      setState((prevState) => ({ ...prevState, drawerOpen: false }));
+    // const handleDrawerOpen = () =>
+    // setState((prevState) => ({ ...prevState, drawerOpen: true }));
+    // const handleDrawerClose = () =>
+    //   setState((prevState) => ({ ...prevState, drawerOpen: false }));
+      
     return (
       <HeaderWrap className={`header ${scrolled ? "scrolled" : ""}`}>
         <HeaderInner justifyContent={'start'}>
@@ -99,23 +126,21 @@ const Header = () =>{
             color: 'inherit',
             'aria-label': 'menu',
             'aria-haspopup': 'true',
-            onClick: handleDrawerOpen,
+            onClick: toggleDrawer('left', true),
           }}
         >
           <MenuIcon />
         </IconButton>
         <Drawer
-          {...{
-            anchor: "left",
-            open: drawerOpen,
-            onClose: handleDrawerClose,
-          }}
+           anchor={'left'}
+           open={state['left']}
+           onClose={toggleDrawer('left', false)}
           className='menu-drawer'
         >
           <Typography variant='h6'>
             Menu
           </Typography>
-          <div>{getDrawerChoices()}</div>
+          <div>{getDrawerChoices('left')}</div>
         </Drawer>
         <img src='img/logo-small.png' className='logo-small'/>
       </HeaderInner>
@@ -133,8 +158,64 @@ const Header = () =>{
                 {/* <Typography variant='h1'>Statement Piece</Typography> */}
                 <img src='img/logo.png' className='logo-outer'/>
             </div>
-            <div>
-                <AccountCircleOutlinedIcon sx={{verticalAlign:'middle'}}/> Aneri Shah 
+            <div className='text-right'>
+              <Button
+              color='black'
+                variant="text"
+                onClick={handleClick}
+                size="small"
+                sx={{ ml: 2 }}
+                aria-controls={open ? 'account-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+              >
+                <AccountCircleOutlinedIcon sx={{mr: 1,verticalAlign:'middle'}}/> Aneri Shah
+              </Button>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open}
+                onClose={handleClose}
+                onClick={handleClose}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: 'visible',
+                    filter: 'drop-shadow(0px 1px 3px rgba(0,0,0,0.15))',
+                    mt: 1.5,
+                    minWidth: '120px',
+                    '&:before': {
+                      content: '""',
+                      display: 'block',
+                      position: 'absolute',
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: 'background.paper',
+                      transform: 'translateY(-50%) rotate(45deg)',
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+              >
+                {/* <CustomMenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <Settings fontSize="small" />
+                  </ListItemIcon>
+                  Settings
+                </CustomMenuItem> */}
+                <CustomMenuItem onClick={handleLogout}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </CustomMenuItem>
+             </Menu>
+               
+                 
             </div>
         </HeaderInner>
         <HeaderInner justifyContent={'center'} className={`header-bottom ${scrolled ? "scrolled" : ""}`}>
@@ -154,17 +235,9 @@ const Header = () =>{
     );
   };
   const getDrawerChoices = () => {
-    return headersData.map(({ label, href }) => {
+    return headersData.map(({ label, link }) => {
       return (
-        <Link disableRipple
-          {...{
-            component: RouterLink,
-            to: href,
-            color: "inherit",
-            style: { textDecoration: "none" },
-            key: label,
-          }}
-        >
+        <Link onClick={toggleDrawer('left', false)} to={link} color={'inherit'} key={label} sx={{textDecoration: 'none'}}>
           <MenuItem disableRipple>{label}</MenuItem>
         </Link>
       );
@@ -172,11 +245,13 @@ const Header = () =>{
   };
   
   return (
+    <>
     <header>
       <AppBar>
           {mobileView ? displayMobile() : displayDesktop()}
       </AppBar>
     </header>
+    </>
   );
 }
 export default Header;

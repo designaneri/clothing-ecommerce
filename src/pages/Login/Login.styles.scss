@@ -1,0 +1,14 @@
+@import '../../styles/_variable.scss';
+.login-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  form{
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+}

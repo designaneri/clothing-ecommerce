@@ -1,1 +1,25 @@
-$md: 767px;
+$white: #ffffff;
+$white-color: #F5F8FA;
+$border-color: #ebebeb;
+$black-color: #3F4254;
+$gray-color: #828191;
+$primary-color:#225CA8;
+$secondary-color: #509DD8;
+$alert-color: #cb492a;
+$main-bg-color:#f2f2f2;
+
+// breakpoint variables 
+$xxl: 1400px;
+$xl: 1200px;
+$lg: 992px;
+$md: 768px;
+$max-md: 767px;
+$sm: 576px;
+
+// the :export directive is the magic sauce for webpack
+:export {
+  whitecolor: $white-color;
+  primarycolor: $primary-color;
+  alertcolor: $alert-color;
+  blackcolor: $black-color;
+}
